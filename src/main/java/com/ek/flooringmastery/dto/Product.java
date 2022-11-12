@@ -1,6 +1,7 @@
 package com.ek.flooringmastery.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Product {
@@ -20,17 +21,17 @@ public class Product {
         this.productType = productType;
     }
     public BigDecimal getCostPerSquareFoot() {
-        return costPerSquareFoot;
+        return costPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
     public void setCostPerSquareFoot(BigDecimal costPerSquareFoot) {
-        this.costPerSquareFoot = costPerSquareFoot;
+        this.costPerSquareFoot = costPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getLaborCostPerSquareFoot() {
-        return laborCostPerSquareFoot;
+        return laborCostPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
     public void setLaborCostPerSquareFoot(BigDecimal laborCostPerSquareFoot) {
-        this.laborCostPerSquareFoot = laborCostPerSquareFoot;
+        this.laborCostPerSquareFoot = laborCostPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ek.flooringmastery.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class State {
@@ -27,10 +28,10 @@ public class State {
     }
 
     public BigDecimal getTaxRate(){
-        return taxRate;
+        return taxRate.setScale(2, RoundingMode.HALF_UP);
     }
     public void setTaxRate(BigDecimal taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = taxRate.setScale(2, RoundingMode.HALF_UP);
     }
 
 

@@ -1,6 +1,7 @@
 package com.ek.flooringmastery.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Order {
@@ -46,11 +47,11 @@ public class Order {
     }
 
     public BigDecimal getTaxRate() {
-        return taxRate;
+        return taxRate.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setTaxRate(BigDecimal taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = taxRate.setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getProductType() {
@@ -62,59 +63,59 @@ public class Order {
     }
 
     public BigDecimal getArea() {
-        return area;
+        return area.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setArea(BigDecimal area) {
-        this.area = area;
+        this.area = area.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getCostPerSquareFoot() {
-        return costPerSquareFoot;
+        return costPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setCostPerSquareFoot(BigDecimal costPerSquareFoot) {
-        this.costPerSquareFoot = costPerSquareFoot;
+        this.costPerSquareFoot = costPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getLaborCostPerSquareFoot() {
-        return laborCostPerSquareFoot;
+        return laborCostPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setLaborCostPerSquareFoot(BigDecimal laborCostPerSquareFoot) {
-        this.laborCostPerSquareFoot = laborCostPerSquareFoot;
+        this.laborCostPerSquareFoot = laborCostPerSquareFoot.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getMaterialCost() {
-        return materialCost;
+        return materialCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setMaterialCost(BigDecimal materialCost) {
-        this.materialCost = materialCost;
+        this.materialCost = materialCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getLaborCost() {
-        return laborCost;
+        return laborCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setLaborCost(BigDecimal laborCost) {
-        this.laborCost = laborCost;
+        this.laborCost = laborCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getTax() {
-        return tax;
+        return tax.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setTax(BigDecimal tax) {
-        this.tax = tax;
+        this.tax = tax.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getTotal() {
-        return total;
+        return total.setScale(2, RoundingMode.HALF_UP);
     }
 
     public void setTotal(BigDecimal total) {
-        this.total = total;
+        this.total = total.setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getDate() {
