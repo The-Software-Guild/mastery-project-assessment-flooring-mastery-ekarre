@@ -3,17 +3,19 @@ package com.ek.flooringmastery.dao;
 import com.ek.flooringmastery.dto.Order;
 import com.ek.flooringmastery.service.FlooringPersistenceException;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 public interface OrderDao {
 
     Order createOrder(int orderNumber, Order order) throws FlooringPersistenceException;
 
-    Order getOrder(int orderNumber);
+    Map<String, Order> getOrderList(String date);
 
     Order getOrder(int orderNumber, String date);
 
-    Order updateOrder(int orderNumber, String date) throws FlooringPersistenceException;
+    Order updateOrder(int orderNumber, String date, String customerName, String stateAbbreviation, String productType, BigDecimal area) throws FlooringPersistenceException;
 
     Order deleteOrder(int orderNumber, String date) throws FlooringPersistenceException;
 

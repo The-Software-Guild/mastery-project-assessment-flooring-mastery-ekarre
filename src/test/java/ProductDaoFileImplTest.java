@@ -17,7 +17,7 @@ class ProductDaoFileImplTest {
 
     @BeforeEach
     void setUp() throws FlooringPersistenceException {
-        String testFile = "testFiles/testProductDao.txt";
+        String testFile = "testFiles/Orders_11142022.txt";
         testProductDao = new ProductDaoFileImpl(testFile);
     }
 
@@ -92,7 +92,7 @@ class ProductDaoFileImplTest {
         //read the file data into a new map (fileMap)
         fileMap = testProductDao.readProduct();
 
-        //assert that the counts are the same and the data is the sam
+        //assert that the counts are the same and the data is the same
         assertEquals("Checking the number of items in the map", testMap.size(), fileMap.size());
 
         //assert that there is a "Carpet" product and that its data matches the test data
