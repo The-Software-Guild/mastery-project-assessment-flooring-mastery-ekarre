@@ -14,4 +14,14 @@
           http://www.springframework.org/schema/context/spring-context.xsd
           http://www.springframework.org/schema/aop
           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+        <bean id = "order" class = "com.ek.flooringmastery.dto.Order"/>
+        <bean id = "product" class = "com.ek.flooringmastery.dto.Product"/>
+        <bean id = "state" class = "com.ek.flooringmastery.dto.State"/>
+        <bean id = "orderDao" class = "com.ek.flooringmastery.dao.OrderDaoFileImpl"/>
+        <bean id = "productDao" class = "com.ek.flooringmastery.dao.ProductDaoFileImpl"/>
+        <bean id = "stateDao" class = "com.ek.flooringmastery.dao.StateDaoFileImpl"/>
+        <bean id = "service" class = "com.ek.flooringmastery.service.OrderCalculationServiceImpl"/>
+
+
 </beans>

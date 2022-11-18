@@ -17,7 +17,21 @@
 
         <!--bean definitions go here-->
 
-        <bean id="io" class="com.ek.flooringmastery.view.UserIOImpl"/>
-        <bean id ="auditDao" class="com.ek.flooringmastery.dao.AuditDaoImpl"/>
+        <bean id = "io" class = "com.ek.flooringmastery.view.UserIOImpl"/>
+        <bean id = "auditDao" class = "com.ek.flooringmastery.dao.AuditDaoImpl"/>
+        <bean id = "stateDao" class = "com.ek.flooringmastery.dao.StateDaoFileImpl"/>
+
+        <bean id = "service" class = "com.ek.flooringmastery.service.OrderCalculationServiceImpl">
+                <constructor-arg ref = "stateDao"/>
+        </bean>
+
+        <bean id = "view" class = "com.ek.flooringmastery.view.FlooringView">
+                <constructor-arg ref = "io"/>
+        </bean>
+
+        <bean id = "controller" class = "com.ek.flooringmastery.controller.FlooringController">
+                <constructor-arg ref = "view"/>
+                <constructor-arg ref = "io"/>
+        </bean>
 
 </beans>

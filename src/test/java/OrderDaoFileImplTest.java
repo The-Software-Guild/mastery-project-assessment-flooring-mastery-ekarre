@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -72,7 +71,7 @@ class OrderDaoFileImplTest {
     }
 
     @Test
-    void getOrder() throws FlooringPersistenceException {
+    void getOrder() throws FlooringPersistenceException, CloneNotSupportedException {
         //create order
         Order testOrder1 = new Order();
         testOrder1.setOrderNumber(5);
@@ -89,7 +88,7 @@ class OrderDaoFileImplTest {
         testOrder1.setTotal(new BigDecimal("1500"));
         testOrder1.setDate("11142022");
 
-        testOrderDao.createOrder(testOrder1.getOrderNumber(), testOrder1);
+        testOrderDao.createOrder(testOrder1);
 
         //get the order
         testOrderDao.getOrder(5, "11142022");
@@ -114,7 +113,7 @@ class OrderDaoFileImplTest {
     }
 
     @Test
-    void updateOrder() throws FlooringPersistenceException {
+    void updateOrder() throws FlooringPersistenceException, CloneNotSupportedException {
         //create a new order
         Order testOrder1 = new Order();
         testOrder1.setOrderNumber(5);
@@ -131,7 +130,7 @@ class OrderDaoFileImplTest {
         testOrder1.setTotal(new BigDecimal("1500"));
         testOrder1.setDate("11142022");
 
-        testOrderDao.createOrder(testOrder1.getOrderNumber(), testOrder1);
+        testOrderDao.createOrder(testOrder1);
 
         //update order
         testOrderDao.updateOrder(5, "11142022", "Stacy McGee", "MO", "Wood", new BigDecimal("100"));
@@ -201,7 +200,7 @@ class OrderDaoFileImplTest {
     }
 
     @Test
-    void testWriteOrderCreateOrderAndDeleteOrder() throws FlooringPersistenceException {
+    void testWriteOrderCreateOrderAndDeleteOrder() throws FlooringPersistenceException, CloneNotSupportedException {
         //create a local map that will have our test data in it
         Map<String, Order> testMap = new LinkedHashMap<>();
 
@@ -211,7 +210,7 @@ class OrderDaoFileImplTest {
         //create test products and put them in the map
         //2,Doctor Who,WA,9.25,Wood,243.00,5.15,4.75,1251.45,1154.25,216.51,2622.21
         Order testOrder1 = new Order();
-        testOrder1.setOrderNumber(5);
+        //testOrder1.setOrderNumber(5);
         testOrder1.setCustomerName("Stacy McGee");
         testOrder1.setStateAbbreviation("MO");
         testOrder1.setTaxRate(new BigDecimal("2.45"));
@@ -225,29 +224,29 @@ class OrderDaoFileImplTest {
         testOrder1.setTotal(new BigDecimal("1500"));
         testOrder1.setDate("06182022");
 
-        testOrderDao.createOrder(testOrder1.getOrderNumber(), testOrder1);
+        testOrderDao.createOrder(testOrder1);
 
         //testOrderDao.writeOrder();
 
         //fileMap = testOrderDao.readOrder();
 
         //assert that there is an order and that it's data matches
-        assertEquals("Check for order 5", testOrder1.getOrderNumber(), testOrderDao.getOrder(5, "06182022").getOrderNumber());
-        assertEquals("Check for order 5", testOrder1.getCustomerName(), testOrderDao.getOrder(5, "06182022").getCustomerName());
-        assertEquals("Check for order 5", testOrder1.getStateAbbreviation(), testOrderDao.getOrder(5, "06182022").getStateAbbreviation());
-        assertEquals("Check for order 5", testOrder1.getTaxRate(), testOrderDao.getOrder(5, "06182022").getTaxRate());
-        assertEquals("Check for order 5", testOrder1.getProductType(), testOrderDao.getOrder(5, "06182022").getProductType());
-        assertEquals("Check for order 5", testOrder1.getArea(), testOrderDao.getOrder(5, "06182022").getArea());
-        assertEquals("Check for order 5", testOrder1.getCostPerSquareFoot(), testOrderDao.getOrder(5, "06182022").getCostPerSquareFoot());
-        assertEquals("Check for order 5", testOrder1.getLaborCostPerSquareFoot(), testOrderDao.getOrder(5, "06182022").getLaborCostPerSquareFoot());
-        assertEquals("Check for order 5", testOrder1.getMaterialCost(), testOrderDao.getOrder(5, "06182022").getMaterialCost());
-        assertEquals("Check for order 5", testOrder1.getLaborCost(), testOrderDao.getOrder(5, "06182022").getLaborCost());
-        assertEquals("Check for order 5", testOrder1.getTax(), testOrderDao.getOrder(5, "06182022").getTax());
-        assertEquals("Check for order 5", testOrder1.getTotal(), testOrderDao.getOrder(5, "06182022").getTotal());
-        assertEquals("Check for order 5", testOrder1.getDate(), testOrderDao.getOrder(5, "06182022").getDate());
+        //assertEquals("Check for order 5", testOrder1.getOrderNumber(), testOrderDao.getOrder(5, "06182022").getOrderNumber());
+        assertEquals("Check for order 5", testOrder1.getCustomerName(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getCustomerName());
+        assertEquals("Check for order 5", testOrder1.getStateAbbreviation(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getStateAbbreviation());
+        assertEquals("Check for order 5", testOrder1.getTaxRate(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getTaxRate());
+        assertEquals("Check for order 5", testOrder1.getProductType(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getProductType());
+        assertEquals("Check for order 5", testOrder1.getArea(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getArea());
+        assertEquals("Check for order 5", testOrder1.getCostPerSquareFoot(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getCostPerSquareFoot());
+        assertEquals("Check for order 5", testOrder1.getLaborCostPerSquareFoot(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getLaborCostPerSquareFoot());
+        assertEquals("Check for order 5", testOrder1.getMaterialCost(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getMaterialCost());
+        assertEquals("Check for order 5", testOrder1.getLaborCost(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getLaborCost());
+        assertEquals("Check for order 5", testOrder1.getTax(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getTax());
+        assertEquals("Check for order 5", testOrder1.getTotal(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getTotal());
+        assertEquals("Check for order 5", testOrder1.getDate(), testOrderDao.getOrder(testOrder1.getOrderNumber(), "06182022").getDate());
 
         //delete the order we added to restore file
-        testOrderDao.deleteOrder(5, "06182022");
+        testOrderDao.deleteOrder(testOrder1.getOrderNumber(), "06182022");
 
         //make sure it was deleted
         //fileMap = testOrderDao.readOrder();

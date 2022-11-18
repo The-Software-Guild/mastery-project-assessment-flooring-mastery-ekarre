@@ -5,19 +5,13 @@ import com.ek.flooringmastery.service.FlooringPersistenceException;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductDaoFileImpl implements ProductDao {
 
     private Map<String, Product> products;
-
     private static final String PRODUCT_FILE_NAME = "data/products.txt";
-
     private String productFileName;
-
     private static final String DELIMITER = ",";
 
     public ProductDaoFileImpl() throws FlooringPersistenceException {
@@ -40,6 +34,11 @@ public class ProductDaoFileImpl implements ProductDao {
     @Override
     public Product getProduct(String productType) {
         return products.get(productType);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return new ArrayList<Product>(products.values());
     }
 
     @Override

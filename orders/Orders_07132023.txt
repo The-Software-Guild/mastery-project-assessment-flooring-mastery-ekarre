@@ -1,0 +1,3 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+6,tony,CA,25.00,Tile,200.00,3.50,4.15,700.00,830.00,382.50,1912.50
+8,dan,WA,9.25,Laminate,340.00,1.75,2.10,595.00,714.00,117.81,1426.81

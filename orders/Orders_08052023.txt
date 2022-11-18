@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+7,Stacy McGee,WA,9.25,Tile,100.00,3.50,4.15,350.00,415.00,68.85,833.85

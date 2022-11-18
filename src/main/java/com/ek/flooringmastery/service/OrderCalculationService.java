@@ -2,13 +2,11 @@ package com.ek.flooringmastery.service;
 
 import com.ek.flooringmastery.dto.Order;
 
+import java.math.BigDecimal;
+
 public interface OrderCalculationService {
 
-    public Order materialCost();
+    public Order updateCalculatedFields(Order order);
 
-    public Order laborCost();
-
-    public Order stateTax();
-
-    public Order orderTotal();
+    public Boolean stateIsValid(String stateAbbr);
 }

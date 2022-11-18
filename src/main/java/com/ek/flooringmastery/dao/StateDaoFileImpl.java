@@ -14,9 +14,7 @@ public class StateDaoFileImpl implements StateDao {
 
     private Map<String, State> states;
     private static final String STATE_FILE_NAME = "data/taxes.txt";
-
     private String fileName;
-
     private static final String DELIMITER = ","; //we will be working with a csv file
 
     public StateDaoFileImpl(String stateTextFile) throws FlooringPersistenceException {

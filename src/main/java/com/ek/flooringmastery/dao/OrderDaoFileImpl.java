@@ -2,7 +2,6 @@ package com.ek.flooringmastery.dao;
 
 import com.ek.flooringmastery.dto.Order;
 import com.ek.flooringmastery.service.FlooringPersistenceException;
-import com.sun.prism.shader.DrawEllipse_ImagePattern_AlphaTest_Loader;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -14,39 +13,39 @@ public class OrderDaoFileImpl implements OrderDao{
 
     private Map<String, Order> orders;
     private Map<String, Integer> orderCounts; //this tracks the number of orders by date
-
+    private int maxID = 0;
     private static final String ORDER_FILE_DIRECTORY_NAME = "orders";
-
     private String orderFileDirectory;
-
     private static final String DELIMITER = ",";
 
     public OrderDaoFileImpl() throws FlooringPersistenceException {
         orderFileDirectory = ORDER_FILE_DIRECTORY_NAME;
-        //orderCounts = new LinkedHashMap<>();
         orders = readOrder();
 
     }
 
     public OrderDaoFileImpl(String directoryName) throws FlooringPersistenceException {
         orderFileDirectory = directoryName;
-        //orderCounts = new LinkedHashMap<>();
         orders = readOrder();
 
     }
 
     @Override
-    public Order createOrder(int orderNumber, Order order) throws FlooringPersistenceException {
-        Order orderCopy = order;
-        Order newOrder = orders.put(String.valueOf(orderNumber), order);
+    public Order createOrder(Order order) throws FlooringPersistenceException {
+        String dateCopy = order.getDate();
+        order.setOrderNumber(maxID + 1); //give it the next order number
+        Order prevOrder = orders.put(String.valueOf(order.getOrderNumber()), order);
+        //increment the maxID to reflect the next value
+        maxID += 1;
+
         //check if this is a new date, if it is put the date into the map
-        if(!orderCounts.containsKey(orderCopy.getDate())){
-            orderCounts.put(orderCopy.getDate(), new Integer(0));
+        if(!orderCounts.containsKey(dateCopy)){
+            orderCounts.put(dateCopy, 0);
         }
         //increment the counter for this date
-        orderCounts.put(orderCopy.getDate(), orderCounts.get(orderCopy.getDate()) + 1);
+        orderCounts.put(dateCopy, orderCounts.get(dateCopy) + 1);
         writeOrder();
-        return newOrder;
+        return order;
     }
 
     @Override
@@ -84,7 +83,7 @@ public class OrderDaoFileImpl implements OrderDao{
         //decrement the count for the order we just deleted
         //if the count is now 0, then delete the file because we don't need it anymore
         orderCounts.put(deletedOrder.getDate(), orderCounts.get(deletedOrder.getDate()) - 1);
-        if(orderCounts.get(deletedOrder.getDate()).equals(new Integer(0))){
+        if(orderCounts.get(deletedOrder.getDate()).equals(0)){
             //delete its file
             File localFile = new File(orderFileDirectory + "/Orders_" + deletedOrder.getDate() + ".txt");
             localFile.delete();
@@ -102,12 +101,12 @@ public class OrderDaoFileImpl implements OrderDao{
         Iterator<String> fileListIterator = orderFileList.iterator();
         while(fileListIterator.hasNext()) {
             String localFileName = fileListIterator.next();
-            System.out.println(localFileName);
             try{
                 scanner = new Scanner(new BufferedReader(new FileReader(orderFileDirectory + "/" + localFileName)));
             } catch (FileNotFoundException e) {
                 throw new FlooringPersistenceException("Can't load data", e);
             }
+
             String currentLine;
             Order currentOrder;
             if(scanner.hasNextLine()) {
@@ -120,10 +119,13 @@ public class OrderDaoFileImpl implements OrderDao{
                 localOrderMapItems.put(String.valueOf(currentOrder.getOrderNumber()), currentOrder);
                 //check if this is a new date, if it is put the date into the map
                 if(!orderCounts.containsKey(currentOrder.getDate())){
-                    orderCounts.put(currentOrder.getDate(), new Integer(0));
+                    orderCounts.put(currentOrder.getDate(), 0);
                 }
                 //increment the counter for this date
                 orderCounts.put(currentOrder.getDate(), orderCounts.get(currentOrder.getDate()) + 1);
+                if(currentOrder.getOrderNumber() > maxID){
+                    maxID = currentOrder.getOrderNumber();
+                }
             }
             scanner.close();
         }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface OrderDao {
 
-    Order createOrder(int orderNumber, Order order) throws FlooringPersistenceException;
+    Order createOrder(Order order) throws FlooringPersistenceException;
 
     Map<String, Order> getOrderList(String date);
 

@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+9,Mary Lamb,CA,25.00,Wood,360.00,5.15,4.75,1854.00,1710.00,891.00,4455.00

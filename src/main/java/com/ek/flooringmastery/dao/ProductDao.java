@@ -4,6 +4,7 @@ import com.ek.flooringmastery.dto.Product;
 import com.ek.flooringmastery.service.FlooringPersistenceException;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 public interface ProductDao {
@@ -11,6 +12,7 @@ public interface ProductDao {
     Product createProduct(String productType, Product product) throws FlooringPersistenceException;
 
     Product getProduct(String productType);
+    List<Product> getAllProducts();
 
     Product updateProduct(String updateProductType, BigDecimal updateCost, BigDecimal updateLaborCost) throws FlooringPersistenceException;
 
